@@ -87,16 +87,17 @@ public class KeywordManager {
 			Collection<Integer> values	= sorted_tfidf.values();
 			Iterator key_iter = keys.iterator();
 			Iterator val_iter = values.iterator();
-//			int count = 10;
-//			System.out.println("key\t count\t");
-//			while(key_iter.hasNext()){//count-- > 0){
-//				String ikey = (String)  key_iter.next();
-//				double ival 	= (Double) val_iter.next();
-//				System.out.println(ikey + "\t " + ival);
+			int count = 10;
+			System.out.println("key\t count\t");
+			while(key_iter.hasNext() && count-- >0){//count-- > 0){
+				String ikey = (String)  key_iter.next();
+				double ival 	= (Double) val_iter.next();
+				System.out.println(ikey + "\t " + ival);
+			}
 			TF_IDF tfid = new TF_IDF();
 			tfid.url = hpd.url;
 			tfid.userid = hpd.userid;
-			tfid.keywordList = sorted_tfidf;
+			tfid.keywordList = TF_IDF_list;
 			DBManager.getInstnace().insertData("KeywordCollection", new Gson().toJson(tfid));
 //			}
 		}catch (Exception e) {
@@ -199,7 +200,7 @@ public class KeywordManager {
 		idf.name = "idfCollection";
 		idf.idfList = new HashMap<String, Double>(); 
 		idf.idfList.putAll(countingMap);
-		DBManager.getInstnace().updateData_IDF(idf);
+		//DBManager.getInstnace().updateData_IDF(idf);
 		return countingMap;
 	}
 	
